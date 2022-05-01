@@ -1,0 +1,98 @@
+* {
+    list-style-type: none;
+    padding: 0;
+    margin:0;
+    text-decoration: none;
+}
+
+@font-face {
+    font-family: robotoBold;
+    src: url(../fonts/roboto/Roboto-Bold.ttf);
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(../fonts/roboto/Roboto-Regular.ttf);
+}
+
+::-webkit-scrollbar{
+    background-color: white;
+    width: .6em;
+}
+::-webkit-scrollbar-thumb {
+    background-color: $primaryColor;
+}
+
+html, body {
+	scroll-behavior: smooth;
+}
+
+body{
+    font-family: roboto;
+    font-size: 18px;
+    background-image: url(../images/doodad.png);
+}
+
+h1, h2, h3, h4{
+    font-family: robotoBold;
+    font-size: 22px;
+    display: inline-block;
+}
+
+.button{
+    display: inline-block;
+    padding: .4em .8em;
+    border-radius: 20px;
+    background: $secondaryColor;
+    overflow: hidden;
+
+    i{
+        @include transi();
+    }
+
+    &:hover i{
+        transform: translate(25%, -25%);
+    }
+}
+
+section{
+    padding: 2em;
+    position: relative;
+    &::after{
+        content: '';
+        background: black;
+        width: 50%;
+        height: 3px;
+        border-radius: 20px;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &:last-of-type::after{
+        display: none;
+    }
+}
+
+.titleColored{
+    position: relative;
+}
+//le sous titrage orange des titres
+.titleColored::after{
+    content: "";
+    transform: translateX(-5%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-color: $secondaryColor;
+    height: 50%;
+    width: 120%;
+    border-radius: 15px;
+}
+
+a{
+    color: black;
+    display: inline-block;
+}

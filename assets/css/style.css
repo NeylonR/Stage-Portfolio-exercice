@@ -1,0 +1,914 @@
+* {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: robotoBold;
+  src: url(../fonts/roboto/Roboto-Bold.ttf);
+}
+@font-face {
+  font-family: roboto;
+  src: url(../fonts/roboto/Roboto-Regular.ttf);
+}
+::-webkit-scrollbar {
+  background-color: white;
+  width: 0.6em;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #6961ff;
+}
+
+html, body {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: roboto;
+  font-size: 18px;
+  background-image: url(../images/doodad.png);
+}
+
+h1, h2, h3, h4 {
+  font-family: robotoBold;
+  font-size: 22px;
+  display: inline-block;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  border-radius: 20px;
+  background: #ff715b;
+  overflow: hidden;
+}
+.button i {
+  transition: all 0.3s ease-in-out;
+}
+.button:hover i {
+  transform: translate(25%, -25%);
+}
+
+section {
+  padding: 2em;
+  position: relative;
+}
+section::after {
+  content: "";
+  background: black;
+  width: 50%;
+  height: 3px;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+section:last-of-type::after {
+  display: none;
+}
+
+.titleColored {
+  position: relative;
+}
+
+.titleColored::after {
+  content: "";
+  transform: translateX(-5%);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #ff715b;
+  height: 50%;
+  width: 120%;
+  border-radius: 15px;
+}
+
+a {
+  color: black;
+  display: inline-block;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-image: url(../images/headBanner.jpg);
+  background-position: bottom center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 80vh;
+  min-height: 600px;
+  padding: 1em;
+  color: white;
+  position: relative;
+}
+header .imgContainer {
+  padding: 0.3em;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  order: 1;
+}
+header .imgContainer img {
+  border: 5px black solid;
+  border-radius: 50%;
+  object-fit: cover;
+  width: 250px;
+}
+header .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+header .header .textContainer {
+  order: 2;
+  text-align: center;
+}
+header .header .textContainer h1 {
+  padding: 0.3em 0;
+}
+header .header .textContainer .socialsIcons {
+  padding: 0.5em 0 1em;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 400px;
+  margin: 0 auto;
+}
+header .header .textContainer .socialsIcons a {
+  transition: all 0.6s ease-in-out;
+}
+header .header .textContainer .socialsIcons a:hover i {
+  color: #6961ff;
+  transform: rotateY(360deg);
+}
+header .header .textContainer .socialsIcons i {
+  color: white;
+  font-size: 50px;
+  transition: all 0.6s ease-in-out;
+}
+
+#navbar {
+  position: fixed;
+  visibility: hidden;
+  z-index: 5;
+  bottom: 0;
+  right: 51px;
+  width: 30%;
+  max-width: 125px;
+  height: 150px;
+  padding: 2em;
+  padding-bottom: 1em;
+  background-color: black;
+  transform: translateY(400%);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+#navbar a {
+  color: white;
+  font-family: roboto;
+  position: relative;
+}
+#navbar a::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  border-radius: 50px;
+  top: 100%;
+  left: 0;
+  transform-origin: 100% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.3s;
+}
+#navbar a:hover::after {
+  transform-origin: 0% 50%;
+  transform: scale3d(1, 1, 1);
+}
+#navbar.active {
+  transform: translate(0);
+  visibility: visible;
+  opacity: 1;
+}
+
+#burgerButton {
+  position: fixed;
+  bottom: 1px;
+  right: 1px;
+  width: 50px;
+  height: 50px;
+  z-index: 5;
+  box-shadow: 0 0 2px black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#burger::after, #burger::before {
+  content: "";
+  position: absolute;
+  display: inline-block;
+}
+
+#burger {
+  position: relative;
+  display: inline-block;
+  transition: all 0.5s ease-in-out;
+}
+
+#burger, #burger::after, #burger::before {
+  width: 2em;
+  height: 0.3em;
+  background-color: black;
+  border-radius: 10px;
+  transition: all 0.5s ease-in-out;
+}
+
+#burger::after {
+  top: -12px;
+  left: 0;
+}
+
+#burger::before {
+  top: 12px;
+  left: 0;
+}
+
+@media screen and (min-width: 900px) {
+  header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 60vh;
+    min-height: 350px;
+  }
+  header .imgContainer {
+    order: 2;
+  }
+  header .imgContainer img {
+    width: 300px;
+  }
+  header .header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 1em;
+    margin: auto 0;
+  }
+  header .header .textContainer {
+    order: 1;
+    width: 50%;
+    text-align: start;
+  }
+  header .header .textContainer .socialsIcons {
+    display: block;
+    max-width: auto;
+    margin: 0;
+  }
+  header .header .textContainer .socialsIcons a {
+    margin-right: 2em;
+  }
+
+  #navbar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+    width: 50%;
+    min-width: 500px;
+    right: 0;
+    position: relative;
+    padding: 0 0 1em 0;
+    background-color: transparent;
+    transform: translateY(0);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    transition: all 0.3s ease-in-out;
+    gap: 0em;
+  }
+  #navbar::after {
+    content: "";
+    background-color: white;
+    width: 60%;
+    height: 2px;
+    border-radius: 50px;
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  #navbar a {
+    color: white;
+    font-family: roboto;
+    position: relative;
+  }
+  #navbar a::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 50px;
+    top: 100%;
+    left: 0;
+    transform-origin: 100% 50%;
+    transform: scale3d(0, 1, 1);
+    transition: transform 0.3s;
+  }
+  #navbar a:hover::after {
+    transform-origin: 0% 50%;
+    transform: scale3d(1, 1, 1);
+  }
+
+  #burgerButton {
+    display: none;
+  }
+}
+#sectionAbout h2 {
+  margin-bottom: 1em;
+}
+#sectionAbout p {
+  padding: 1em 0.5em;
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+}
+
+#sectionSkills img {
+  width: 50px;
+}
+#sectionSkills .skillsIcons {
+  padding-top: 1.5em;
+}
+#sectionSkills .skillsIcons ul {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, minmax(100px, 1fr));
+  grid-row-gap: 2em;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  margin: 0 auto;
+}
+#sectionSkills .skillsIcons svg {
+  transition: all 0.3s ease-in-out;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+#sectionSkills .skillsIcons svg path {
+  fill: black;
+  transition: all 0.3s ease-in-out;
+}
+#sectionSkills .skillsIcons svg path.sqlText {
+  fill: white;
+}
+#sectionSkills .skillsIcons svg:hover {
+  transform: scale(1.2);
+}
+#sectionSkills .skillsIcons svg:hover path:not(.sqlText) {
+  fill: #6961ff;
+}
+
+#sectionProjects .projectsCardContainer {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(1, minmax(100%, 1fr));
+  grid-column-gap: 1em;
+  grid-row-gap: 4em;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  margin: 0 auto;
+}
+#sectionProjects .projectCard {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: 1px #6961ff solid;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+  min-width: 250px;
+  max-width: 400px;
+  background-color: white;
+}
+#sectionProjects .projectCard h4 {
+  padding: 1em 0;
+}
+#sectionProjects .projectCard p {
+  padding: 0.5em 0;
+  cursor: pointer;
+}
+#sectionProjects .projectCard:hover .buttonModal i {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+#sectionProjects .projectCard:hover img {
+  transform: scale(1.1);
+}
+#sectionProjects h2 {
+  margin-bottom: 1em;
+}
+#sectionProjects .buttonModal i {
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-100%);
+}
+#sectionProjects .imgContainer {
+  width: 100%;
+  line-height: 0;
+  overflow: hidden;
+}
+#sectionProjects img {
+  transition: all 0.3s ease-in-out;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+#sectionProjects .informationsForModal {
+  display: none;
+}
+
+#sectionContact h2 {
+  margin-bottom: 1em;
+}
+#sectionContact p {
+  padding: 0.5em 0;
+}
+#sectionContact a.mail {
+  font-size: 16px;
+  margin: 0 auto;
+  transition: all 0.3s ease-in-out;
+}
+#sectionContact a.mail:hover {
+  color: #6961ff;
+}
+#sectionContact .socialsIcons {
+  padding: 0.5em 0 1em;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 400px;
+  margin: 0 auto;
+}
+#sectionContact .socialsIcons a {
+  transition: all 0.6s ease-in-out;
+}
+#sectionContact .socialsIcons a:hover i {
+  color: #6961ff;
+  transform: rotateY(360deg);
+}
+#sectionContact .socialsIcons i {
+  color: black;
+  font-size: 50px;
+  transition: all 0.6s ease-in-out;
+}
+#sectionContact form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+#sectionContact form input, #sectionContact form textarea {
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  padding: 0.5em;
+  font-family: roboto;
+  font-size: 16px;
+  margin-bottom: 0.4em;
+  border: 1px solid black;
+  width: 100%;
+}
+#sectionContact form textarea {
+  margin-bottom: 1em;
+  resize: none;
+}
+#sectionContact form button.button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-family: roboto;
+  font-size: 16px;
+  display: inline-block;
+  padding: 0.4em 1.8em;
+}
+#sectionContact form button.button:hover {
+  transform: translate(2px, -2px);
+  box-shadow: -1px 1px 2px black;
+}
+#sectionContact img {
+  display: none;
+}
+
+@media screen and (min-width: 650px) {
+  #sectionAbout {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  #sectionAbout article {
+    width: 90%;
+  }
+  #sectionAbout p {
+    transform: translateX(3em);
+    text-align: start;
+  }
+
+  #sectionSkills {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  #sectionSkills article {
+    width: 90%;
+  }
+  #sectionSkills .skillsIcons ul {
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+    grid-column-gap: 1em;
+    grid-row-gap: 2em;
+  }
+}
+@media screen and (min-width: 740px) {
+  #sectionProjects .projectsCardContainer {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(40%, 1fr));
+  }
+
+  #sectionContact form {
+    width: 85%;
+    margin: 0 auto;
+  }
+}
+@media screen and (min-width: 900px) {
+  section {
+    padding: 4em;
+  }
+
+  #sectionAbout article {
+    width: 85%;
+  }
+}
+@media screen and (min-width: 950px) {
+  #sectionContact .textContainer {
+    text-align: center;
+  }
+  #sectionContact form {
+    width: 50%;
+    margin: 0;
+  }
+  #sectionContact img {
+    display: block;
+    width: 250px;
+  }
+  #sectionContact .imgWithFormContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 1em;
+  }
+}
+@media screen and (min-width: 1050px) {
+  section {
+    padding: 6em;
+  }
+
+  #sectionSkills .skillsIcons {
+    transform: translateX(3em);
+  }
+  #sectionSkills .skillsIcons ul {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  section {
+    padding: 7em;
+  }
+
+  #sectionProjects .projectsCardContainer {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(38%, 1fr));
+  }
+
+  #sectionContact img {
+    width: 350px;
+  }
+}
+@media screen and (min-width: 1500px) {
+  section {
+    padding: 8em 8em 8em 12em;
+  }
+
+  #sectionProjects .projectsCardContainer {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(27%, 1fr));
+  }
+
+  #sectionSkills .skillsIcons ul {
+    width: 70%;
+  }
+}
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+  padding: 3em 0 0.5em;
+}
+footer::before {
+  content: "";
+  background-color: #ff715b;
+  width: 200vw;
+  height: 200vw;
+  position: absolute;
+  top: 0.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  z-index: -1;
+}
+footer .socials {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-bottom: 2em;
+  width: 50%;
+  min-width: 315px;
+}
+footer .socials a {
+  font-family: robotoBold;
+  position: relative;
+}
+footer .socials a::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background-color: black;
+  border-radius: 50px;
+  top: 100%;
+  left: 0;
+  transform-origin: 100% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.3s;
+}
+footer .socials a:hover::after {
+  transform-origin: 0% 50%;
+  transform: scale3d(1, 1, 1);
+}
+footer p {
+  font-size: 14px;
+  text-align: center;
+  padding: 0 0.5em;
+}
+
+#modal {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  inset: 0 0 0 0;
+  overflow: hidden;
+  z-index: 9;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.301);
+  animation: fadeOut 0.5s forwards, slideOut 0.5s forwards;
+}
+#modal.open {
+  opacity: 1;
+  visibility: visible;
+  animation: fadeIn 0.5s forwards;
+}
+#modal.open .modalContent {
+  transform: translateX(0%);
+}
+#modal .modalContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+  gap: 0.5em;
+  flex-wrap: nowrap;
+  width: 80%;
+  height: 80%;
+  border: 1px solid black;
+  border-radius: 25px;
+  padding: 2em;
+  background-color: white;
+  overflow: hidden;
+  transform: translateX(-250%);
+  transition: all 0.5s ease-in-out;
+}
+#modal .modalContent .imgContainer {
+  width: 60%;
+  height: 70%;
+}
+#modal .modalContent .imgContainer img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+#modal .modalContent .textContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 38%;
+  height: 85%;
+  padding: 2em 1em;
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0px 0px 3px 0.5px #0000006b;
+}
+#modal .modalContent .textContainer h2, #modal .modalContent .textContainer p {
+  margin-bottom: 2em;
+}
+#modal .modalContent .textContainer div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+#modal .modalContent .textContainer i {
+  font-size: 40px;
+  margin-bottom: 0.5em;
+}
+#modal .modalContent .textContainer .demo {
+  margin-bottom: 0.5em;
+}
+#modal .modalContent .textContainer .demo i {
+  transition: all 0.3s ease-in-out;
+  font-size: 18px;
+  margin: 0;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(-100%);
+}
+#modal .modalContent .textContainer .demo:hover i {
+  transform: translateX(0);
+  visibility: visible;
+  opacity: 1;
+}
+#modal .modalContent .textContainer .github {
+  transition: all 0.3s ease-in-out;
+}
+#modal .modalContent .textContainer .github:hover {
+  color: #6961ff;
+}
+#modal .modalContent .textContainer ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+#modal .modalContent .textContainer ul li {
+  border: 1px solid black;
+  padding: 0.5em 1em;
+  background-color: black;
+  color: white;
+}
+#modal #closeButton {
+  position: absolute;
+  right: 2%;
+  top: 2%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+#modal #closeButton::before, #modal #closeButton::after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 4px;
+  border-radius: 5px;
+  background-color: #ff715b;
+  transition: all 0.3s ease-in-out;
+}
+#modal #closeButton::before {
+  transform: rotate(45deg);
+}
+#modal #closeButton::after {
+  transform: rotate(-45deg);
+}
+#modal #closeButton:hover::before {
+  transform: rotate(-90deg);
+}
+#modal #closeButton:hover::after {
+  transform: rotate(90deg);
+}
+
+@media screen and (max-width: 1100px) {
+  #modal .modalContent {
+    width: 90%;
+    height: 90%;
+  }
+}
+@media screen and (max-width: 1000px) {
+  #modal .modalContent {
+    width: 100vw;
+    height: 100%;
+    padding: 0.5em;
+  }
+}
+@media screen and (max-width: 900px) {
+  #modal .modalContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    width: 100vw;
+    height: 98%;
+    padding: 0.5em;
+  }
+  #modal .modalContent .imgContainer {
+    width: 85%;
+  }
+  #modal .modalContent .textContainer {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 400px) {
+  #modal .modalContent .imgContainer {
+    display: none;
+  }
+  #modal #closeButton {
+    right: 1em;
+    top: 0.8%;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
