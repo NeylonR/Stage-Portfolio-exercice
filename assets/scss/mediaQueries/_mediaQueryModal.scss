@@ -42,6 +42,11 @@
             .imgContainer{
                 display: none;
             }
+
+            .textContainer{
+                flex-wrap: nowrap;
+                overflow: scroll;
+            }
         }
 
         #closeButton{
